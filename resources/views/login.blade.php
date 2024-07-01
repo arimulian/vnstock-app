@@ -1,53 +1,47 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html class="h-full bg-white" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/css/app.css','resources/js/app.js', 'resources/js/dark-mode.js'])
-    <title>{{config('name.app')}}</title>
-    <script>
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    </script>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    @vite(['resources/css/app.css'])
 </head>
-<body class="bg-gray-50 dark:bg-gray-900">
-<div class="flex flex-col items-center justify-center px-3 mx-auto md:h-screen pt:mt-0 dark:bg-gray-900">
-    <div class="flex items-center justify-center text-2xl font-semibold lg:mb-10 dark:text-white">
-        <img src="{{ Vite::image('logo.png') }}" class="w-36" alt="Laravel Logo">
-        <span>VnStock</span>
+<body class="h-full">
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img class="mx-auto h-16 w-auto" src="{{ Vite::asset('resources/images/logo.png') }}" alt="Your Company">
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your
+            account</h2>
     </div>
-    <!-- Card -->
-    <div class="w-full max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow dark:bg-gray-800">
-        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            Sign in to platform
-        </h2>
-        <form class="mt-8 space-y-6" action="{{ route('login') }}" method="post">
+    <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <form method="post" action="/login" class="max-w-sm mx-auto">
             @csrf
-            <div>
-                <label for="email" class="block mb-2 text-sm font-medium text-gray-900
-                dark:text-white">Your
+            <div class="mb-5">
+                <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                     email</label>
-                <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900
-                sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5
-                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="name@company.com ">
+                <input type="email" id="email" name="email" class="bg-gray-50 border border-gray-300
+                text-gray-900
+                text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 @error('email')
-                <div class="text-red-500">{{ $message }}</div>
+                <div class="text-sm text-red-500">{{ $message }}</div>
                 @enderror
             </div>
-            <div>
+            <div class="mb-5">
                 <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
                     password</label>
-                <input type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                <input type="password" id="password" name="password" class="bg-gray-50 border border-gray-300
+                text-gray-900
+                text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5
+                dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 @error('password')
-                <div class="text-red-500">{{ $message }}</div>
+                <div class="text-sm text-red-500">{{ $message }}</div>
                 @enderror
             </div>
-            <button type="submit" class="w-full px-5 py-3 text-base font-medium text-center text-white bg-primary-700 rounded-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 sm:w-auto dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
-                Login to your account
+            <button type="submit" class="text-white bg-purple-600 hover:bg-purple-800 focus:ring-4 focus:outline-none
+            focus:ring-purple-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center
+            dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-800">
+                Submit
             </button>
         </form>
     </div>

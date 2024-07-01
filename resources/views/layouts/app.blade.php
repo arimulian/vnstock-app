@@ -1,40 +1,29 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html x-data="data()" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite(['resources/css/app.css','resources/js/app.js', 'resources/js/dark-mode.js'])
-    <title>{{ $title ?? config('app.name') }}</title>
-
-    <script>
-        // On page load or when changing themes, best to add inline in `head` to avoid FOUC
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
-    </script>
+    <link rel="icon" type="image/png" href="{{ Vite::asset('resources/images/logo.png') }}" sizes="60X60"/>
+    <title>{{ $title ?? 'Page Title' }}</title>
+    @vite(['resources/js/app.js', 'resources/css/app.css'])
 </head>
-
-<body>
-{{-- partial "navbar-dashboard" . --}}
-<x-navbar/>
-{{--//partial "navbar-dashboard" . --}}
-<div class="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-
-    {{-- partial "sidebar" . --}}
+<body x-data="{darkMode: $persist(false)}" :class="{'dark': darkMode === true }" class="antialiased">
+<div
+        class="flex h-screen bg-gray-50 dark:bg-gray-900"
+        :class="{ 'overflow-hidden': isSideMenuOpen }"
+>
+    <!-- Desktop sidebar -->
     <x-sidebar/>
-    {{--//partial "sidebar" . --}}
-
-    <div id="main-content" class="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
-        <main>
-            {{-- .Content --}}
-            {{ $slot }}
-        </main>
-        {{-- if .Params.footer }} {{ partial "footer-dashboard" . }} {{ end --}}
+    {{----}}
+    <div class="flex flex-col flex-1 w-full">
+        {{--Header--}}
+        <x-header/>
+        {{----}}
+        {{--Main--}}
+        {{$slot}}
+        {{--//--}}
     </div>
-
 </div>
-
+@livewireScriptConfig
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -18,10 +19,11 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'email' => 'admin@test.com',
-            'password' => Hash::make('123456789'),
-            'token' => Str::uuid()->toString()
-        ]);
+        Category::factory(10)->create();
+//        User::factory()->create([
+//            'email' => 'admin@test.com',
+//            'password' => Hash::make('123456789'),
+//            'token' => Str::uuid()->toString()
+//        ]);
     }
 }

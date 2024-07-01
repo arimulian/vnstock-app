@@ -14,7 +14,7 @@ class LoginController extends Controller
     /**
      * Handle the incoming request.
      */
-    public function index(Request $request): View
+    public function index(): View
     {
         return view('login');
     }
@@ -40,7 +40,6 @@ class LoginController extends Controller
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
-        $request->session()->flush();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect()->route('login');
